@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retech Revive Comunidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12181a;
+    --bg-panel:#1b2225;
+    --bg-raised:#212a2d;
+    --line: rgba(232,228,217,0.12);
+    --line-strong: rgba(232,228,217,0.22);
+    --text:#e9e5da;
+    --text-muted:#92a09b;
+    --cyan:#5fd8e8;
+    --amber:#ff9a4a;
+    --green:#6ad17e;
+    --brick:#7c4128;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(232,228,217,0.05) 1px, transparent 1.6px);
+    background-size: 26px 26px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:14px; height:1px;
+    background:var(--amber);
+    display:inline-block;
+  }
+
+  h1,h2,h3{
+    font-family:'Big Shoulders', sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:1.04;
+    margin:0;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,24,26,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+  }
+  .logo{
+    font-family:'Big Shoulders', sans-serif;
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    text-decoration:none;
+  }
+  .logo span.a{color:var(--cyan); text-shadow:0 0 14px rgba(95,216,232,0.55);}
+  .logo span.b{color:var(--amber); text-shadow:0 0 14px rgba(255,154,74,0.55);}
+  nav.links{display:flex; gap:30px; align-items:center;}
+  nav.links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--text-muted);
+    transition:color .2s ease;
+  }
+  nav.links a:hover{color:var(--cyan);}
+  .nav-cta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--bg);
+    background:var(--amber);
+    padding:9px 18px;
+    border-radius:3px;
+    text-decoration:none;
+    border:1px solid var(--amber);
+  }
+  .nav-cta:focus-visible, a:focus-visible, button:focus-visible{
+    outline:2px solid var(--cyan); outline-offset:3px;
+  }
+  .menu-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:90px 0 70px;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(124,65,40,0.10), transparent 55%),
+      repeating-linear-gradient(0deg, transparent 0 39px, rgba(232,228,217,0.035) 39px 40px),
+      repeating-linear-gradient(90deg, transparent 0 39px, rgba(232,228,217,0.035) 39px 40px);
+  }
+  .hero-inner{max-width:760px;}
+  .status-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--green);
+    border:1px solid rgba(106,209,126,0.35);
+    background:rgba(106,209,126,0.07);
+    padding:6px 12px;
+    border-radius:20px;
+    margin-bottom:26px;
+  }
+  .led{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 6px var(--green);
+    animation:blink 2.4s infinite;
+  }
+  @keyframes blink{0%,100%{opacity:1;} 50%{opacity:0.25;}}
+
+  .hero h1{
+    font-size:clamp(34px, 5.6vw, 64px);
+    color:var(--text);
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--amber);
+  }
+  .hero p.lead{
+    font-size:17px;
+    line-height:1.65;
+    color:var(--text-muted);
+    max-width:560px;
+    margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn-primary{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase; letter-spacing:0.06em; font-size:13px;
+    background:var(--cyan);
+    color:#0d1416;
+    padding:14px 26px;
+    border-radius:3px;
+    text-decoration:none;
+    border:1px solid var(--cyan);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{box-shadow:0 0 22px rgba(95,216,232,0.45); transform:translateY(-1px);}
+  .btn-ghost{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase; letter-spacing:0.06em; font-size:13px;
+    color:var(--text);
+    padding:14px 26px;
+    border-radius:3px;
+    text-decoration:none;
+    border:1px solid var(--line-strong);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .btn-ghost:hover{border-color:var(--amber); color:var(--amber);}
+
+  /* ---------- MANIFESTO ---------- */
+  .manifesto{
+    padding:56px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .manifesto-grid{
+    display:grid; grid-template-columns: 1fr 2fr; gap:40px; align-items:start;
+  }
+  .manifesto p{
+    font-size:18px; line-height:1.7; color:var(--text);
+    margin:0;
+  }
+  .manifesto p strong{color:var(--amber); font-weight:600;}
+
+  /* ---------- CATEGORIES ---------- */
+  .categories{padding:80px 0;}
+  .section-head{margin-bottom:42px; max-width:640px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); margin-top:14px;}
+
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  .cat-card{
+    position:relative;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px 22px 22px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .cat-card:hover{
+    border-color:var(--line-strong);
+    transform:translateY(-3px);
+  }
+  .cat-card::before{
+    content:"";
+    position:absolute; top:0; left:18px; right:18px; height:3px;
+    background:var(--bar-color, var(--cyan));
+    border-radius:0 0 3px 3px;
+  }
+  .cat-card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:0.12em;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:16px;
+  }
+  .cat-icon{
+    width:38px; height:38px;
+    border:1px solid var(--line-strong);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+    color:var(--bar-color, var(--cyan));
+  }
+  .cat-card h3{
+    font-size:21px;
+    color:var(--text);
+    margin-bottom:8px;
+  }
+  .cat-card p{
+    font-size:14.5px; line-height:1.6;
+    color:var(--text-muted);
+    margin:0 0 18px;
+  }
+  .cat-link{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; letter-spacing:0.04em;
+    text-decoration:none;
+    color:var(--bar-color, var(--cyan));
+    border-bottom:1px solid transparent;
+  }
+  .cat-link:hover{border-bottom-color:currentColor;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how{
+    padding:80px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--bg-panel);
+  }
+  .how-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:30px;
+    margin-top:40px;
+  }
+  .how-step .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--amber);
+    letter-spacing:0.08em;
+    margin-bottom:10px;
+    display:block;
+  }
+  .how-step h3{font-size:19px; color:var(--text); margin-bottom:8px;}
+  .how-step p{font-size:14.5px; color:var(--text-muted); line-height:1.6; margin:0;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:70px 0 40px;}
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    flex-wrap:wrap; gap:24px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:36px;
+    margin-bottom:26px;
+  }
+  footer h2{font-size:clamp(24px,3vw,34px); max-width:520px;}
+  footer .logo{font-size:20px;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--text-muted);
+    letter-spacing:0.04em;
+  }
+
+  @media (max-width: 880px){
+    .manifesto-grid{grid-template-columns:1fr;}
+    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .how-grid{grid-template-columns:1fr;}
+    nav.links{display:none;}
+  }
+  @media (max-width: 540px){
+    .cat-grid{grid-template-columns:1fr;}
+    .nav-row{padding:14px 18px;}
+    .hero{padding:60px 0 50px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-row">
+    <a href="#" class="logo"><span class="a">RETECH</span> <span class="b">REVIVE</span></a>
+    <nav class="links">
+      <a href="#foro">Foro</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#como-funciona">Cómo funciona</a>
+    </nav>
+    <a href="#unete" class="nav-cta">Únete</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <span class="status-pill"><span class="led"></span> Comunidad activa ahora</span>
+    <h1>No es basura, es <em>tecnología</em> esperando su segundo acto.</h1>
+    <p class="lead">Retech Revive Comunidad es un punto de encuentro —no una empresa— para quienes reparan, reutilizan y le dan otra vida a los ordenadores, móviles y placas que todo el mundo más daría por muertos.</p>
+    <div class="hero-ctas">
+      <a href="#unete" class="btn-primary">Entrar al foro</a>
+      <a href="#categorias" class="btn-ghost">Ver categorías</a>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="wrap manifesto-grid">
+    <div class="eyebrow">Quiénes somos</div>
+    <p>Aquí no vendemos nada ni representamos a ninguna marca. Somos gente con cajones llenos de placas, monitores CRT y portátiles "muertos" que prefiere <strong>desoldar antes que tirar</strong>. Un sitio para preguntar, compartir y encontrar esa pieza que ya nadie fabrica.</p>
+  </div>
+</section>
+
+<section class="categories" id="categorias">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Dónde empezar</div>
+      <h2>Categorías del foro</h2>
+    </div>
+
+    <div class="cat-grid">
+
+      <div class="cat-card" style="--bar-color:var(--cyan)">
+        <span class="tag">CAT.01</span>
+        <div class="cat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg>
+        </div>
+        <h3>Hardware Retro</h3>
+        <p>Equipos clásicos y restauraciones.</p>
+        <a href="#" class="cat-link">Ver hilos →</a>
+      </div>
+
+      <div class="cat-card" style="--bar-color:var(--amber)">
+        <span class="tag">CAT.02</span>
+        <div class="cat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2-2-1.8 1.8-1.5-1.5L14.7 6.3z"/></svg>
+        </div>
+        <h3>Reparaciones</h3>
+        <p>Ayuda técnica.</p>
+        <a href="#" class="cat-link">Ver hilos →</a>
+      </div>
+
+      <div class="cat-card" style="--bar-color:var(--green)">
+        <span class="tag">CAT.03</span>
+        <div class="cat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M7 9l3 3-3 3M13 15h4"/></svg>
+        </div>
+        <h3>Linux y Software Ligero</h3>
+        <p>Sistemas para equipos antiguos.</p>
+        <a href="#" class="cat-link">Ver hilos →</a>
+      </div>
+
+      <div class="cat-card" style="--bar-color:var(--cyan)">
+        <span class="tag">CAT.04</span>
+        <div class="cat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="6" height="6"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>
+        </div>
+        <h3>Electrónica</h3>
+        <p>Modificaciones y reparaciones.</p>
+        <a href="#" class="cat-link">Ver hilos →</a>
+      </div>
+
+      <div class="cat-card" style="--bar-color:var(--amber)">
+        <span class="tag">CAT.05</span>
+        <div class="cat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 7h11l-3-3M17 17H6l3 3M7 7v10M17 7v10"/></svg>
+        </div>
+        <h3>Intercambio</h3>
+        <p>Donaciones y búsqueda de componentes.</p>
+        <a href="#" class="cat-link">Ver hilos →</a>
+      </div>
+
+      <div class="cat-card" style="--bar-color:var(--green)">
+        <span class="tag">CAT.06</span>
+        <div class="cat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.5 1 1.2 1 2.5h6c0-1.3.4-2 1-2.5A6 6 0 0 0 12 3z"/></svg>
+        </div>
+        <h3>Proyectos DIY</h3>
+        <p>Creaciones de la comunidad.</p>
+        <a href="#" class="cat-link">Ver hilos →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="how" id="como-funciona">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:0;">
+      <div class="eyebrow">Cómo funciona</div>
+      <h2>Tres pasos, cero burocracia</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-step">
+        <span class="num">01</span>
+        <h3>Crea tu cuenta</h3>
+        <p>Sin formularios eternos. Te registras y eliges qué categorías te interesan.</p>
+      </div>
+      <div class="how-step">
+        <span class="num">02</span>
+        <h3>Cuenta lo que tienes</h3>
+        <p>Un equipo roto, una duda de cableado o una placa que sobra: ábrelo en el hilo que toque.</p>
+      </div>
+      <div class="how-step">
+        <span class="num">03</span>
+        <h3>Encuentra una mano</h3>
+        <p>Alguien de la comunidad responde, propone una pieza o se ofrece a repararlo contigo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="unete">
+  <div class="wrap">
+    <div class="footer-top">
+      <h2>No es basura, es tecnología esperando su segundo acto.</h2>
+      <a href="#" class="logo"><span class="a">RETECH</span> <span class="b">REVIVE</span></a>
+    </div>
+    <div class="footer-bottom">
+      <span>HECHO POR LA COMUNIDAD, PARA LA COMUNIDAD</span>
+      <span>RECICLA · REUTILIZA · REINVENTA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
