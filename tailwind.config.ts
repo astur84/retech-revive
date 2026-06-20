@@ -1,19 +1,22 @@
-// tailwind.config.ts
-theme: {
-  extend: {
-    colors: {
-      bg: '#12181a',
-      'bg-panel': '#1b2225',
-      cyan: '#5fd8e8',
-      amber: '#ff9a4a',
-      green: '#6ad17e',
-      text: '#e9e5da',
-      'text-muted': '#92a09b',
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        bg: '#12181a',
+        'bg-panel': '#1b2225',
+        cyan: '#5fd8e8',
+        amber: '#ff9a4a',
+      },
     },
-    fontFamily: {
-      sans: ['IBM Plex Sans', 'sans-serif'],
-      mono: ['IBM Plex Mono', 'monospace'],
-      display: ['Big Shoulders', 'sans-serif'],
-    }
-  }
-}
+  },
+  plugins: [],
+};
+
+export default config;
