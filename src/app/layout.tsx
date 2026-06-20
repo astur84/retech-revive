@@ -1,14 +1,8 @@
-// src/app/layout.tsx
-import './globals.css'; // Asegúrate de importar tu CSS aquí
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body>
+      {/* Añade esta clase bg-red-500 temporalmente */}
+      <body className="bg-red-500">
         {children}
       </body>
     </html>
