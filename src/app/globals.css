@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-bg text-text; /* Tailwind usará tus colores definidos arriba */
+    @apply bg-[#12181a] text-[#e9e5da];
   }
 }
