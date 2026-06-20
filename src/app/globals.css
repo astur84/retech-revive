@@ -2,13 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --bg: #12181a;
-  --text: #e9e5da;
-}
-
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: 'IBM Plex Sans', sans-serif;
+@layer base {
+  body {
+    @apply bg-bg text-text; /* Tailwind usará tus colores definidos arriba */
+  }
 }
