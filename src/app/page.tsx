@@ -1,7 +1,7 @@
-import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import CategoryCard from '@/components/CategoryCard';
-import { createClient } from '@/lib/supabase/server'; // Tu cliente de Supabase
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import CategoryCard from '../components/CategoryCard';
+import { createClient } from '../lib/supabase/server';
 
 export default async function Home() {
   const supabase = createClient();
