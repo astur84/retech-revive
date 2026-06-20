@@ -3,7 +3,22 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg: #12181a;
+    --text: #e9e5da;
+  }
+
   body {
-    @apply bg-[#12181a] text-[#e9e5da];
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    /* Este es el gradiente de puntos que define tu estilo */
+    background-image: radial-gradient(
+      circle at 1px 1px, 
+      rgba(232, 228, 217, 0.05) 1px, 
+      transparent 1.6px
+    );
+    background-size: 26px 26px;
+    margin: 0;
   }
 }
