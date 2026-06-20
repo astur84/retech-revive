@@ -2,23 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --bg: #12181a;
-    --text: #e9e5da;
-  }
-
-  body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'IBM Plex Sans', sans-serif;
-    /* Este es el gradiente de puntos que define tu estilo */
-    background-image: radial-gradient(
-      circle at 1px 1px, 
-      rgba(232, 228, 217, 0.05) 1px, 
-      transparent 1.6px
-    );
-    background-size: 26px 26px;
-    margin: 0;
-  }
+body {
+  margin: 0;
+  background-color: #12181a !important; /* Forzamos el color */
+  background-image: radial-gradient(circle at 1px 1px, rgba(232, 228, 217, 0.05) 1px, transparent 1.6px) !important;
+  background-size: 26px 26px !important;
+  color: #e9e5da;
+  font-family: sans-serif;
 }
